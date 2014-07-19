@@ -1,7 +1,7 @@
 package database.bean;
 
 /**
- * 临时
+ * 临时对象
  * 
  * @author LeeFranker
  * 
