@@ -7,21 +7,21 @@ import java.util.Map;
 
 public interface HttpResponse {
 	/**
-	 * ·µ»ØÏìÓ¦µÄ×´Ì¬Âë
+	 * è·å–å“åº”çš„çŠ¶æ€ç 
 	 * 
 	 * @return
 	 */
 	int getStatusCode();
 
 	/**
-	 * »ñÈ¡ÏìÓ¦Í·µÄËùÓĞ¼üÖµ¶Ô
+	 * è·å–å“åº”å¤´çš„é”®å€¼å¯¹
 	 * 
 	 * @return
 	 */
 	Map<String, List<String>> getAllHeads();
 
 	/**
-	 * »ñÈ¡ÏìÓ¦Í·¶ÔÄ³¸ö¼üÖµ¶Ô
+	 * è·å–å“åº”çš„å†…å®¹
 	 * 
 	 * @param name
 	 * @return
@@ -29,33 +29,33 @@ public interface HttpResponse {
 	List<String> getHeader(String name);
 
 	/**
-	 * »ñÈ¡ÏìÓ¦µÄÄÚÈİ
+	 * é‡Šæ”¾å“åº”çš„å†…å®¹
 	 * 
 	 * @return
 	 */
 	InputStream getContent();
 
 	/**
-	 * ÊÍ·ÅÏìÓ¦µÄÄÚÈİ
+	 * è·å–å“åº”å†…å®¹
 	 */
 	void consumeContent();
 
 	/**
-	 * »ñÈ¡ÏìÓ¦ÄÚÈİµÄ³¤¶È
+	 * è·å–å“åº”å†…å®¹çš„é•¿åº¦
 	 * 
 	 * @return
 	 */
 	long getContentLength();
 
 	/**
-	 * »ñÈ¡ÏìÓ¦µÄ×Ö·û±àÂë
+	 * è·å–å“åº”çš„å­—ç¬¦ç¼–ç 
 	 * 
 	 * @return
 	 */
 	Charset getContentType();
 
 	/**
-	 * ÏìÓ¦µÄÄÚÈİÊÇ·ñ¿ÉÒÔ»ñÈ¡¶à¸ö
+	 * å“åº”çš„å†…å®¹æ˜¯å¦å¯è·å–å¤šä¸ª
 	 * 
 	 * @return
 	 */

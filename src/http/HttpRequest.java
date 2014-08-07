@@ -9,7 +9,7 @@ public interface HttpRequest {
 	}
 
 	/**
-	 * ÉèÖÃÇëÇóµÄURL
+	 * è®¾ç½®è¯·æ±‚çš„URL
 	 * 
 	 * @param url
 	 * @return
@@ -17,14 +17,14 @@ public interface HttpRequest {
 	HttpRequest setUrl(String url);
 
 	/**
-	 * »ñÈ¡ÇëÇóµÄURL
+	 * è·å–è¯·æ±‚çš„URL
 	 * 
 	 * @return
 	 */
 	String getUrl();
 
 	/**
-	 * ÉèÖÃÇëÇóµÄÀàĞÍ
+	 * è®¾ç½®è¯·æ±‚çš„ç±»å‹
 	 * 
 	 * @param method
 	 * @return
@@ -32,14 +32,14 @@ public interface HttpRequest {
 	HttpRequest setMethod(HttpMethod method);
 
 	/**
-	 * »ñÈ¡ÇëÇóµÄÀàĞÍ
+	 * è·å–è¯·æ±‚çš„ç±»å‹
 	 * 
 	 * @return
 	 */
 	HttpMethod getMethod();
 
 	/**
-	 * ÉèÖÃÇëÇóµÄ×Ö·û±àÂë
+	 * è®¾ç½®è¯·æ±‚çš„å­—ç¬¦ç¼–ç 
 	 * 
 	 * @param charsetName
 	 * @return
@@ -47,14 +47,14 @@ public interface HttpRequest {
 	boolean setCharset(String charsetName);
 
 	/**
-	 * »ñÈ¡ÇëÇóµÄ×Ö·û±àÂë
+	 * è·å–å­—ç¬¦ç¼–ç 
 	 * 
 	 * @return
 	 */
 	String getCharset();
 
 	/**
-	 * Ìí¼Ó×Ö·û´®²ÎÊı
+	 * æ·»åŠ å­—ç¬¦ä¸²çš„å‚æ•°
 	 * 
 	 * @param key
 	 * @param value
@@ -63,7 +63,7 @@ public interface HttpRequest {
 	HttpRequest addStringParams(String key, String value);
 
 	/**
-	 * Ìí¼ÓÎÄ¼ş²ÎÊı
+	 * æ·»åŠ æ–‡ä»¶å‚æ•°
 	 * 
 	 * @param key
 	 * @param file
@@ -72,7 +72,7 @@ public interface HttpRequest {
 	HttpRequest addFileParams(String key, File file);
 
 	/**
-	 * ÇëÇóÌí¼ÓÍ·µÄ²ÎÊı
+	 * æ·»åŠ è¯·æ±‚å¤´çš„å‚æ•°
 	 * 
 	 * @param key
 	 * @param value

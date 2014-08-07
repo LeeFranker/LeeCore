@@ -1,7 +1,5 @@
 package database.core;
 
-import java.util.ArrayList;
-
 import log.Log;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,8 +16,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteHelper<T> extends SQLiteOpenHelper implements SQLite {
 	private static final String TAG = SQLiteHelper.class.getName();
 
-	private ArrayList<DBTable> tables = new ArrayList<DBTable>();
-
 	private static SQLiteHelper instance;
 
 	public static SQLiteHelper getInstance() {
@@ -35,16 +31,6 @@ public class SQLiteHelper<T> extends SQLiteOpenHelper implements SQLite {
 	 */
 	public static void initiate(Context context, String dbName, int dbVersion) {
 		instance = new SQLiteHelper(context, dbName, dbVersion);
-	}
-
-	/**
-	 * 初始化表
-	 * 
-	 * @param table
-	 */
-	public void addTable(DBTable table) {
-		if (!tables.contains(table))
-			tables.add(table);
 	}
 
 	/**
@@ -98,7 +84,6 @@ public class SQLiteHelper<T> extends SQLiteOpenHelper implements SQLite {
 	 */
 	@Override
 	public void createTable(DBTable table) {
-
 		SQLiteDatabase db = getWritableDatabase();
 		db.execSQL(table.getTableString());
 	}
@@ -129,10 +114,7 @@ public class SQLiteHelper<T> extends SQLiteOpenHelper implements SQLite {
 	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		Log.d(TAG, "创建所有数据表个数:" + tables.size());
-		for (DBTable table : tables) {
-			createTable(table);
-		}
+		createTables(db);
 		Log.d(TAG, "完成创建所有数据表");
 	}
 
@@ -141,7 +123,6 @@ public class SQLiteHelper<T> extends SQLiteOpenHelper implements SQLite {
 	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVer, int newVer) {
-		Log.d(TAG, "onUpgrade-表个数:" + tables.size());
 		Log.d(TAG, "onUpgrade-新版本：" + newVer);
 		Log.d(TAG, "onUpgrade-旧版本：" + oldVer);
 		update(db, oldVer, newVer);
@@ -153,12 +134,9 @@ public class SQLiteHelper<T> extends SQLiteOpenHelper implements SQLite {
 	 */
 	@Override
 	public void onDowngrade(SQLiteDatabase db, int oldVer, int newVer) {
-		Log.d(TAG, "onDowngrade-表个数:" + tables.size());
 		Log.d(TAG, "onDowngrade-新版本：" + newVer);
 		Log.d(TAG, "onDowngrade-旧版本：" + oldVer);
-		for (DBTable table : tables) {
-			dropTable(table);
-		}
+		dropTables(db);
 		Log.d(TAG, "完成onDowngrade");
 	}
 
@@ -180,6 +158,20 @@ public class SQLiteHelper<T> extends SQLiteOpenHelper implements SQLite {
 	public void closeDataBase() {
 		SQLiteDatabase db = getWritableDatabase();
 		db.close();
+	}
+
+	/**
+	 * 创建所有表
+	 */
+	private void createTables(SQLiteDatabase db) {
+
+	}
+
+	/**
+	 * 删除所有表
+	 */
+	private void dropTables(SQLiteDatabase db) {
+
 	}
 
 }

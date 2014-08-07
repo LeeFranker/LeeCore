@@ -10,7 +10,7 @@ import org.apache.http.cookie.Cookie;
 public interface Http {
 
 	/**
-	 * ´´½¨HTTPÇëÇó
+	 * åˆ›å»ºHTTPè¯·æ±‚
 	 * 
 	 * @param url
 	 * @return
@@ -18,7 +18,7 @@ public interface Http {
 	HttpRequest newRequest(String url);
 
 	/**
-	 * ·µ»ØHTTP½á¹û
+	 * æ‰§è¡ŒHTTPè¯·æ±‚
 	 * 
 	 * @param request
 	 * @return
@@ -26,74 +26,75 @@ public interface Http {
 	HttpResponse execute(HttpRequest request);
 
 	/**
-	 * ÖÕÖ¹HTTPÇëÇó
+	 * ç»ˆæ­¢å½“å‰çš„HTTPè¯·æ±‚
 	 */
 	void abort();
 
 	/**
-	 * µ±Ç°HttpClientÊÇ·ñÍ£Ö¹
+	 * 
+	 * å½“å‰çš„HTTPè¯·æ±‚æ˜¯å¦åœæ­¢
 	 * 
 	 * @return
 	 */
 	boolean isDisposed();
 
 	/**
-	 * Í£Ö¹HttpClient
+	 * åœæ­¢HTTPè¯·æ±‚
 	 */
 	void dispose();
 
 	/**
-	 * Ìí¼Ócookie
+	 * æ·»åŠ Cookie
 	 * 
 	 * @param cookie
 	 */
 	void addCookie(Cookie cookie);
 
 	/**
-	 * ÉèÖÃcookie
+	 * è®¾ç½®Cookie
 	 * 
 	 * @param cookie
 	 */
 	void setCookie(Cookie cookie);
 
 	/**
-	 * Çå¿Õcookie
+	 * æ¸…ç©ºCookie
 	 */
 	void clearCookie();
 
 	/**
-	 * »ñÈ¡³¬Ê±¶ÔÉè¶¨Öµ
+	 * è·å–è¶…æ—¶æ—¶é—´çš„è®¾å®šå€¼
 	 */
 	int getConnectionTimeOut();
 
 	/**
-	 * ÉèÖÃ³¬Ê±ÉèÖÃÖµ
+	 * è®¾ç½®è¶…æ—¶æ—¶é—´
 	 */
 	void setConnectionTimeOut(int connectionTimeOut);
 
 	/**
-	 * »ñÈ¡ÏìÓ¦³¬Ê±Éè¶¨Öµ
+	 * è·å–å“åº”è¶…æ—¶çš„è®¾å®šå€¼
 	 * 
 	 * @return
 	 */
 	int getResponseTimeOut();
 
 	/**
-	 * ÉèÖÃÏìÓ¦³¬Ê±ÉèÖÃÖµ
+	 * è®¾ç½®å“åº”è¶…æ—¶çš„è®¾ç½®å€¼
 	 * 
 	 * @param responseTimeOut
 	 */
 	void setResponseTimeOut(int responseTimeOut);
 
 	/**
-	 * ×¢²áHTTPÇëÇó¹ı³ÌµÄ¼àÌı
+	 * æ³¨å†ŒHTTPè¯·æ±‚è¿‡ç¨‹çš„ç›‘å¬
 	 * 
 	 * @param listener
 	 */
 	void registerProgressListener(HttpProgressListener listener);
 
 	/**
-	 * È¡ÏûHTTPÇëÇó¹ı³ÌµÄ¼àÌı
+	 * å–æ¶ˆHTTPè¯·æ±‚è¿‡ç¨‹å¯¹ç›‘å¬
 	 * 
 	 * @param listener
 	 */

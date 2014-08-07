@@ -1,7 +1,6 @@
 package database;
 
 import android.content.Context;
-import database.core.DBTable;
 import database.core.SQLiteHelper;
 
 /**
@@ -31,16 +30,6 @@ public class DataBaseMgr {
 
 	public static void initDataBase(Context context) {
 		SQLiteHelper.initiate(context, DB_NAME, DB_VERSION);
-	}
-
-	/**
-	 * 初始化表
-	 * 
-	 * @param table
-	 */
-	public static void addTable(DBTable table) {
-		SQLiteHelper helper = SQLiteHelper.getInstance();
-		helper.addTable(table);
 	}
 
 	/**
