@@ -51,8 +51,7 @@ public class FileUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static File createFile(String fileDir, String fileName)
-			throws IOException {
+	public static File createFile(String fileDir, String fileName) throws IOException {
 		File file = new File(fileDir, fileName);
 		file.createNewFile();
 		return file;
@@ -195,8 +194,7 @@ public class FileUtils {
 					temp = new File(oldPath + names[i]);
 				if (temp.isFile()) {
 					FileInputStream fis = new FileInputStream(temp);
-					FileOutputStream out = new FileOutputStream(newPath
-							+ File.separator + temp.getName().toString());
+					FileOutputStream out = new FileOutputStream(newPath + File.separator + temp.getName().toString());
 					byte[] buffer = new byte[BUFFER_SIZE];
 					int len = 0;
 					while ((len = fis.read(buffer)) != -1) {
@@ -207,8 +205,7 @@ public class FileUtils {
 					fis.close();
 				}
 				if (temp.isDirectory())
-					copyDir(oldPath + File.separator + names[i], newPath
-							+ File.separator + names[i]);
+					copyDir(oldPath + File.separator + names[i], newPath + File.separator + names[i]);
 			}
 
 		} catch (Exception e) {
@@ -217,34 +214,15 @@ public class FileUtils {
 	}
 
 	/**
-	 * 字符串写入文件
-	 * 
-	 * @param string
-	 * @param fileName
-	 */
-	public static void wirteFileString(String string, String fileName) {
-		try {
-			deleteFile(fileName);
-			File file = createFile(fileName);
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-			writer.write(string);
-			writer.flush();
-			writer.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 字符串写入文件
+	 * 把字符串写入文件里面
 	 * 
 	 * @param file
 	 * @param content
 	 */
-	public static void writeFileString(File file, String content) {
+	public static void writeStr2File(File file, String string) {
 		FileOutputStream os = null;
 		try {
-			byte[] buffer = content.getBytes("UTF-8");
+			byte[] buffer = string.getBytes("UTF-8");
 			os = new FileOutputStream(file);
 			os.write(buffer);
 			os.flush();
@@ -264,7 +242,13 @@ public class FileUtils {
 		}
 	}
 
-	public static void writeFileString(String fileName,String content) {
+	/**
+	 * 把字符串写入文件里面
+	 * 
+	 * @param fileName
+	 * @param content
+	 */
+	public static void writeStr2File(String fileName, String string) {
 		BufferedReader bufferedReader = null;
 		BufferedWriter bufferedWriter = null;
 		File distFile = new File(fileName);
@@ -273,7 +257,7 @@ public class FileUtils {
 				distFile.delete();
 			}
 			distFile.createNewFile();
-			bufferedReader = new BufferedReader(new StringReader(content));
+			bufferedReader = new BufferedReader(new StringReader(string));
 			bufferedWriter = new BufferedWriter(new FileWriter(distFile));
 			char buf[] = new char[BUFFER_SIZE];
 			int len;
@@ -289,12 +273,12 @@ public class FileUtils {
 	}
 
 	/**
-	 * 文件夹读取字符串
+	 * 从文件中读取字符串
 	 * 
 	 * @param fileName
 	 * @return
 	 */
-	public static String readFileString(String fileName) {
+	public static String readStrFormFile(String fileName) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));
 			StringBuilder builder = new StringBuilder();
@@ -310,15 +294,14 @@ public class FileUtils {
 	}
 
 	/**
-	 * 遍历文件夹
+	 * 遍历文件夹获取文件列表
 	 * 
 	 * @param fileDir
 	 * @param list
 	 * @param suffix
 	 * @return
 	 */
-	public static List<File> searchBySuffix(String fileDir, List<File> list,
-			String... suffix) {
+	public static List<File> searchFileBySuffix(String fileDir, List<File> list, String... suffix) {
 		if (null == list)
 			list = new ArrayList<File>();
 		File file = new File(fileDir);
@@ -327,8 +310,7 @@ public class FileUtils {
 			if (childs != null)
 				for (int i = 0; i < childs.length; i++) {
 					if (childs[i].isDirectory()) {
-						searchBySuffix(childs[i].getAbsolutePath(), list,
-								suffix);
+						searchFileBySuffix(childs[i].getAbsolutePath(), list, suffix);
 					} else {
 						for (int j = 0; j < suffix.length; j++) {
 							if (childs[i].getName().endsWith(suffix[j])) {
@@ -350,16 +332,14 @@ public class FileUtils {
 	 * @param fileName
 	 * @return
 	 */
-	public static boolean isSaveSuccess(InputStream content, String fileDir,
-			String fileName) {
+	public static boolean getIsFileSaveSuccess(InputStream content, String fileDir, String fileName) {
 		FlushedInputStream is = null;
 		FileOutputStream os = null;
 		BufferedOutputStream bos = null;
 		try {
 			deleteFile(fileDir, fileName);
 			File file = createFile(fileDir, fileName);
-			is = new FlushedInputStream(new BufferedInputStream(content,
-					IO_BUFFER_SIZE));
+			is = new FlushedInputStream(new BufferedInputStream(content, IO_BUFFER_SIZE));
 			os = new FileOutputStream(file);
 			bos = new BufferedOutputStream(os, IO_BUFFER_SIZE);
 			int byteRead = 0;
@@ -437,22 +417,77 @@ public class FileUtils {
 		} else if (length >= SIZE_KB && length < SIZE_MB) {
 			return (double) (Math.round((length / SIZE_KB) * 10) / 10.0) + "MB";
 		} else if (length >= SIZE_MB && length < SIZE_GB) {
-			BigDecimal longs = new BigDecimal(Double.valueOf(length + "")
-					.toString());
-			BigDecimal sizeMB = new BigDecimal(Double.valueOf(SIZE_MB + "")
-					.toString());
-			String result = longs.divide(sizeMB, SACLE,
-					BigDecimal.ROUND_HALF_UP).toString();
+			BigDecimal longs = new BigDecimal(Double.valueOf(length + "").toString());
+			BigDecimal sizeMB = new BigDecimal(Double.valueOf(SIZE_MB + "").toString());
+			String result = longs.divide(sizeMB, SACLE, BigDecimal.ROUND_HALF_UP).toString();
 			return result + "GB";
 		} else {
-			BigDecimal longs = new BigDecimal(Double.valueOf(length + "")
-					.toString());
-			BigDecimal sizeMB = new BigDecimal(Double.valueOf(SIZE_GB + "")
-					.toString());
-			String result = longs.divide(sizeMB, SACLE,
-					BigDecimal.ROUND_HALF_UP).toString();
+			BigDecimal longs = new BigDecimal(Double.valueOf(length + "").toString());
+			BigDecimal sizeMB = new BigDecimal(Double.valueOf(SIZE_GB + "").toString());
+			String result = longs.divide(sizeMB, SACLE, BigDecimal.ROUND_HALF_UP).toString();
 			return result + "TB";
 		}
 	}
 
+	/**
+	 * 将File转换为byte[]
+	 * 
+	 * @param file
+	 * @return
+	 * @throws
+	 */
+	public static byte[] file2byte(File file) {
+		try {
+			InputStream is = new FileInputStream(file);
+			long length = file.length();
+			byte[] bytes = new byte[(int) length];
+			// 读取数据到byte数组中
+			int offset = 0;
+			int numRead = 0;
+			while (offset < bytes.length && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+				offset += numRead;
+			}
+			is.close();
+			// 确保所有数据均被读取
+			if (offset < bytes.length)
+				return null;
+			return bytes;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 将byte[]转换为File
+	 * 
+	 * @param bytes
+	 * @param file
+	 * @return
+	 */
+	public static boolean byte2file(byte[] bytes, File file) {
+		BufferedOutputStream bos = null;
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(file);
+			bos = new BufferedOutputStream(fos);
+			bos.write(bytes);
+			return true;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if (bos != null)
+					bos.close();
+				if (fos != null)
+					fos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

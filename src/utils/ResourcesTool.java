@@ -43,8 +43,7 @@ public class ResourcesTool {
 		if (mResources == null)
 			return -1;
 		else
-			return mResources.getIdentifier(sourceName, sourceType,
-					mPackageName);
+			return mResources.getIdentifier(sourceName, sourceType, mPackageName);
 	}
 
 	public static int getResouceIdForString(String sourceName) {
