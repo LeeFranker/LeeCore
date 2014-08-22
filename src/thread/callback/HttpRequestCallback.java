@@ -8,14 +8,14 @@ package thread.callback;
  */
 public interface HttpRequestCallback {
 
-	public void onNetWorkExceptionCallBack(Object... objects);
+	public void onNetWorkExceptionCallBack();
 
-	public void onPreExecuteCallBack(Object... objects);
+	public void onPreExecuteCallBack();
 
 	public void onProgressUpdateCallBack(Integer... objects);
 
 	public void onCancelledCallBack(Object... objects);
 
-	public void onPostExecuteCallBack(Object... objects);
+	public void onPostExecuteCallBack(Object object);
 
 }
