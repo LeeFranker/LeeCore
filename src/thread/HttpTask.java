@@ -1,5 +1,7 @@
 package thread;
 
+import java.util.HashMap;
+
 import thread.callback.HttpRequestCallback;
 import android.content.Context;
 
@@ -11,7 +13,7 @@ import android.content.Context;
  */
 public abstract class HttpTask implements IfaceHttpTask, IfaceHttpParams, IfaceHttpResultCode {
 
-	protected final String TAG = this.getClass().getSimpleName();
+	protected final String TAG = "wangli";
 
 	/**
 	 * 是否是Get请求
@@ -34,11 +36,16 @@ public abstract class HttpTask implements IfaceHttpTask, IfaceHttpParams, IfaceH
 	/**
 	 * 获取请求地址
 	 * 
-	 * @param context
-	 * @param params
 	 * @return
 	 */
 	public abstract String getUrl();
+
+	/**
+	 * 获取请求参数
+	 * 
+	 * @return
+	 */
+	public abstract HashMap<String, String> getParams();
 
 	/**
 	 * 执行网络请求
@@ -48,8 +55,7 @@ public abstract class HttpTask implements IfaceHttpTask, IfaceHttpParams, IfaceH
 	 * @return
 	 */
 	public abstract boolean todo(Context context, HttpRequestCallback callback);
-	
-	
+
 	/**
 	 * 执行网络请求
 	 * 
@@ -57,5 +63,12 @@ public abstract class HttpTask implements IfaceHttpTask, IfaceHttpParams, IfaceH
 	 * @return
 	 */
 	public abstract boolean todo(Context context);
+
+	/**
+	 * 打印参数内容
+	 * 
+	 * @return
+	 */
+	public abstract String toString();
 
 }
