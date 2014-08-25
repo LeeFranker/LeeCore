@@ -19,7 +19,7 @@ public class HttpRequestCallbackImpl implements HttpRequestCallback {
 	}
 
 	@Override
-	public void onNetWorkExceptionCallBack(final Object... objects) {
+	public void onNetWorkExceptionCallBack() {
 		if (mHandler == null)
 			return;
 		mHandler.post(new Runnable() {
@@ -27,7 +27,7 @@ public class HttpRequestCallbackImpl implements HttpRequestCallback {
 			@Override
 			public void run() {
 				if (mRequestCallback != null)
-					mRequestCallback.onNetWorkExceptionCallBack(objects);
+					mRequestCallback.onNetWorkExceptionCallBack();
 
 			}
 		});
@@ -35,7 +35,7 @@ public class HttpRequestCallbackImpl implements HttpRequestCallback {
 	}
 
 	@Override
-	public void onPreExecuteCallBack(final Object... objects) {
+	public void onPreExecuteCallBack() {
 		if (mHandler == null)
 			return;
 		mHandler.post(new Runnable() {
@@ -43,7 +43,7 @@ public class HttpRequestCallbackImpl implements HttpRequestCallback {
 			@Override
 			public void run() {
 				if (mRequestCallback != null)
-					mRequestCallback.onPreExecuteCallBack(objects);
+					mRequestCallback.onPreExecuteCallBack();
 
 			}
 		});
@@ -83,7 +83,7 @@ public class HttpRequestCallbackImpl implements HttpRequestCallback {
 	}
 
 	@Override
-	public void onPostExecuteCallBack(final Object... objects) {
+	public void onPostExecuteCallBack(final Object object) {
 		if (mHandler == null)
 			return;
 		mHandler.post(new Runnable() {
@@ -91,7 +91,7 @@ public class HttpRequestCallbackImpl implements HttpRequestCallback {
 			@Override
 			public void run() {
 				if (mRequestCallback != null)
-					mRequestCallback.onPostExecuteCallBack(objects);
+					mRequestCallback.onPostExecuteCallBack(object);
 
 			}
 		});
