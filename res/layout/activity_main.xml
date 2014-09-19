@@ -15,4 +15,11 @@
         android:layout_height="wrap_content"
         android:text="@string/test" />
 
+    <widget.CircleImageView
+        android:id="@+id/imageview"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/p3"
+        android:background="#00ff00" />
+
 </LinearLayout>
